@@ -28,6 +28,7 @@ fn handle_connection(mut stream: TcpStream, blockchain: &mut Blockchain) {
     if let Ok(block) = serde_json::from_str::<Block>(&received) {
         blockchain.add_block(block);
         println!("✅ Block added! Current Chain: {:?}", blockchain.chain);
+        println!("✅ Current Chain Valid: {}", blockchain.is_valid());
     }
 }
 
