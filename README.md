@@ -1,10 +1,3 @@
-Bilkul! Main tumhare iss **Rust-based basic blockchain with TCP networking** project ke liye ek clean, professional aur engaging **README.md** likh ke deta hoon — jise tum seedha apne GitHub pe daal sakte ho.
-
----
-
-## 📄 `README.md`
-
-```markdown
 # 🔗 Rust Blockchain P2P Prototype 🚀
 
 A simple blockchain implementation in Rust with basic Proof-of-Work (PoW) mining and TCP-based peer-to-peer (P2P) networking.  
