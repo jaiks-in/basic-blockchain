@@ -1,9 +1,3 @@
-Wah bhai — sahi baat! Har acchi project ka ek **solid README.md** hona chahiye.
-Main ab tere poore ab tak ke **blockchain project (Phase 1 se Phase 7 tak)** ka ek clean, professional, and developer-friendly `README.md` bana ke deta hoon.
-
----
-
-## 📦 📄 Final README.md for Your Blockchain Project
 
 ```markdown
 # 🚀 Rust Blockchain From Scratch
