@@ -1,13 +1,20 @@
 mod blockchain;
 use blockchain::{Blockchain, Transaction, Wallet};
-
+mod network;
+use network::{start_server,send_block};
+use std::thread;
+use std::time::Duration;
 fn main() {
     let mut blockchain = Blockchain::new(4);
 
     // Wallets create
     let wallet1 = Wallet::new();
     let wallet2 = Wallet::new();
-
+    let server_blockchain=blockchain.clone();
+    thread::spawn(move||{
+        start_server(server_blockchain, "127.0.0.1:6000");
+    });
+    thread::sleep(Duration::from_secs(1));
     // Transaction banaye
     let mut tx1 = Transaction {
         sender: format!("{:?}", wallet1.public_key.to_encoded_point(false)),

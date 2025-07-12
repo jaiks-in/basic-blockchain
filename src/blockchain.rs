@@ -24,7 +24,7 @@ impl Transaction {
 
     pub fn sign_transaction(&mut self, private_key: &SigningKey) {
         let hash = self.calculate_hash();
-        let signature = private_key.sign(hash.as_bytes());
+        let signature:p256::ecdsa::Signature = private_key.sign(hash.as_bytes());
         let signature_base64 = general_purpose::STANDARD.encode(signature.to_der());
         self.signature = Some(signature_base64);
     }
@@ -126,7 +126,18 @@ impl Blockchain {
         self.chain.push(block);
         self.pending_transaction.clear();
     }
-
+    pub fn add_block(&mut self,block:Block){
+        let last_block=self.chain.last().unwrap();
+        if block.previous_hash!=last_block.hash{
+            println!("Block rejected Previous hash mismatched");
+            return;
+        }
+        if block.calculate_hash()!=block.hash{
+            println!("block rejected invalid block hash");
+        }
+        self.chain.push(block);
+        println!("Block Successfully added to Chain!");
+    }
     pub fn is_valid(&self) -> bool {
         for i in 1..self.chain.len() {
             let current = &self.chain[i];
