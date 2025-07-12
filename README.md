@@ -1,29 +1,35 @@
-# 🔗 Rust Blockchain P2P Prototype 🚀
-
-A simple blockchain implementation in Rust with basic Proof-of-Work (PoW) mining and TCP-based peer-to-peer (P2P) networking.  
-This project demonstrates how blocks are created, mined, transferred, and validated between nodes using TCP sockets.
+Wah bhai — sahi baat! Har acchi project ka ek **solid README.md** hona chahiye.
+Main ab tere poore ab tak ke **blockchain project (Phase 1 se Phase 7 tak)** ka ek clean, professional, and developer-friendly `README.md` bana ke deta hoon.
 
 ---
 
-## 📌 Features
+## 📦 📄 Final README.md for Your Blockchain Project
 
-- ✅ Basic Blockchain with Blocks containing:
-  - Timestamp
-  - Data
-  - Previous Hash
-  - Nonce
-  - Hash
+```markdown
+# 🚀 Rust Blockchain From Scratch
 
-- ✅ Proof-of-Work Mining Algorithm  
-  (Adjustable difficulty level — finds a hash starting with N zeros)
+A fully working decentralized blockchain built from scratch in **Rust** — covering:
+- Block creation
+- Proof of Work (mining)
+- Transaction management
+- Wallet system with ECDSA keypairs
+- Transaction signing & verification
+- P2P networking over TCP
+- Block propagation to peers
 
-- ✅ TCP Server-Client Networking
-  - Accepts incoming block data from peer nodes
-  - Sends block data to connected peers
+---
 
-- ✅ JSON Serialization & Deserialization using `serde_json`
+## 📚 Project Phases
 
-- ✅ Multi-threaded Connection Handling with Rust's `std::thread`
+| Phase | Description |
+|:------------|:-------------------------------------------------|
+| ✅ Phase 1 | Basic Blockchain with block struct and hash generation |
+| ✅ Phase 2 | Proof of Work mining mechanism (difficulty-based hash target) |
+| ✅ Phase 3 | Transaction struct and transaction pool |
+| ✅ Phase 4 | Mining pending transactions with rewards |
+| ✅ Phase 5 | Blockchain integrity verification (is_valid) |
+| ✅ Phase 6 | Wallet system with ECDSA (p256) keypairs, transaction signing & verification |
+| ✅ Phase 7 | P2P networking over TCP — nodes communicate, share and accept mined blocks |
 
 ---
 
@@ -31,100 +37,97 @@ This project demonstrates how blocks are created, mined, transferred, and valida
 
 ```
 
-📂 src
-┣ 📜 main.rs            // Entry point: runs server and triggers mining
-┣ 📜 blockchain.rs      // Blockchain & Block definitions + logic
-┣ 📜 network.rs         // TCP networking functions (server, client)
-┣ 📜 lib.rs             // (if using as a library)
-📄 Cargo.toml
+.
+├── Cargo.toml
+├── src
+│   ├── main.rs
+│   ├── blockchain.rs
+│   └── network.rs
+└── README.md
 
 ````
 
 ---
 
-## ⚙️ How It Works
+## 🛠️ How to Run
 
-1️⃣ **Start the blockchain server:**
+### 📥 Install dependencies
+```bash
+cargo build
+````
+
+### 🏃 Run the blockchain node
 
 ```bash
 cargo run
-````
-
-2️⃣ Server listens for incoming TCP connections on the specified address.
-
-3️⃣ Mines a new block with Proof-of-Work.
-
-4️⃣ New blocks can be sent to other peers via TCP connection.
-
-5️⃣ Receives blocks from peers and adds them to its chain after basic validation.
-
----
-
-## 📡 TCP API Overview
-
-* `start_server(blockchain, address)`
-  → Starts TCP server to accept blocks from other nodes.
-
-* `send_block(block, address)`
-  → Sends a mined block to another peer node via TCP.
-
----
-
-## 📦 Dependencies
-
-* `serde`
-* `serde_json`
-* `chrono`
-* `sha2`
-* `std::net` (for TcpListener & TcpStream)
-* `std::thread`
-
-Add them via Cargo.toml.
-
----
-
-## 📸 Example
-
-```bash
-✅ Block mined: 00000f7a28e7dbce... (nonce: 4821)
-✅ Block added! Current Chain: [Block#1, Block#2, ...]
-Received:
-{"timestamp": "2025-07-09 13:00:12", "data": "New Block!", "prev_hash": "...", ...}
-✅ Block added! Current Chain: [Block#1, Block#2, Block#3]
 ```
 
 ---
 
-## 📚 What I Learned
+## 📡 Running P2P Nodes
 
-* Rust struct, traits & ownership
-* SHA-256 hashing in Rust
-* Proof-of-Work concept implementation
-* TCP client-server communication
-* Multithreading with `std::thread`
-* JSON serialization / deserialization with `serde_json`
+In **one terminal:**
 
----
+```bash
+cargo run
+```
 
-## 📈 Future Improvements
+In **another terminal** (on a different port or IP)
+modify `network.rs` → change port in `start_server()`
+and re-run:
 
-* ✅ Transaction struct and transaction pool
-* ✅ Block validation logic
-* ✅ Persistent storage with `sled` or `rocksdb`
-* ✅ WebSocket or gRPC-based networking
-* ✅ Consensus mechanism (PoS, PoW, PBFT)
+```bash
+cargo run
+```
 
----
-
-## 👨‍💻 Author
-
-**Jai Sharma**
-Rust Developer | Blockchain Enthusiast
+Now they can send and receive blocks over TCP.
 
 ---
 
-## ⭐️ If you found this interesting, give it a ⭐️ and fork the repo!
+## 📦 Tech Stack
 
-Let’s build decentralized systems together 🚀
+* 🦀 Rust
+* 📚 Serde (for JSON serialization)
+* 🔐 SHA256 (sha2 crate)
+* ⛏️ p256 ECDSA (for wallet and transaction signing)
+* ⚡ Tokio (for future async networking extensions)
+* 📡 TCP (for P2P node communication)
 
+---
 
+## 🔒 Wallet System
+
+* Each wallet generates an **ECDSA (p256)** public-private keypair.
+* Transactions are signed using the sender’s private key.
+* Receivers verify the transaction using the sender’s public key.
+* Mining rewards come from a special `"System"` address.
+
+---
+
+## 📡 P2P Networking
+
+* Nodes run TCP servers on configurable ports.
+* Nodes can broadcast mined blocks to peers.
+* Peers receive blocks, verify, and add them to their own chain if valid.
+
+---
+
+## 📜 Next Phases (Future Roadmap)
+
+* Phase 8: Distributed Consensus (Longest chain rule + fork resolution)
+* Phase 9: Asynchronous networking with `Tokio` or `libp2p`
+* Phase 10: WebSocket-based P2P node discovery
+* Phase 11: Simple Web UI Dashboard for monitoring chain
+
+---
+
+## 📖 Author
+
+**Jai Sharma (coderjaisharma)**
+🚀 Blockchain Rust Developer | Open Source Contributor
+
+---
+
+## 📝 License
+
+This project is open source and free to use under the MIT License.
